@@ -14,7 +14,7 @@ module.exports = {
     compress: true,
     port: 3000,
     hot: true,
-    historyApiFallback: true
+    historyApiFallback: true    //作用：找不到就会返回html
     // contentBase: path.join(__dirname, "dist")
   },
   module: {
