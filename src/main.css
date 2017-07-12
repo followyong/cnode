@@ -9,7 +9,6 @@
 .header>img{
   width: 40%;
 }
-<<<<<<< HEAD
 .topics{
   padding:0 10px;
 }
@@ -17,8 +16,6 @@
   display:flex;
   align-items: center;
   margin:0 5px;
-
-
 }
 .topic .img {
   margin:10px;
@@ -80,5 +77,3 @@
 .substance img{
   width: 100%;
 }
-=======
->>>>>>> 46ac287f1aefc5c4823671e0b86a7112bc3b8e48
