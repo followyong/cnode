@@ -1,0 +1,81 @@
+.header{
+  display:flex;
+  height:100px;
+  background: #7daced;
+  justify-content:space-between;
+  align-items: center;
+  padding:0 15px;
+}
+.header>img{
+  width: 40%;
+}
+.topics{
+  padding:0 10px;
+}
+.topic{
+  display:flex;
+  align-items: center;
+  margin:0 5px;
+
+
+}
+.topic .img {
+  margin:10px;
+  flex-shrink: 0;
+}
+.count{
+  margin-right: 10px;
+}
+.title{
+  flex-wrap:wrap;
+
+}
+.title h3{
+  text-overflow: ellipsis;
+	overflow: hidden;
+}
+.title .tab{
+  padding:2px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  background-color: yellowgreen;
+  border-radius: 3px;
+  color:white;
+  font-size: 12px;
+}
+.content{
+  padding:10px;
+}
+.titleBar{
+  width: 100%;
+  display: flex;
+
+}
+.titleBar .tab{
+  padding:2px;
+  height: 20px;
+  background-color: yellowgreen;
+  border-radius: 3px;
+  color:white;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.content .author{
+  width: 100%;
+  color:#C2C2C2;
+  padding: 10px 0;
+}
+.substance{
+  border-top: 1px solid #eee;
+  width: 100%;
+  font-size: 12px;
+
+}
+.substance table{
+  width: 100%;
+  table-layout: fixed;
+}
+.substance img{
+  width: 100%;
+}
