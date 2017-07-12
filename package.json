@@ -33,13 +33,20 @@
   "dependencies": {
     "antd": "^2.11.2",
     "axios": "^0.16.2",
+<<<<<<< HEAD
     "html-webpack-plugin": "^2.29.0",
+=======
+>>>>>>> 46ac287f1aefc5c4823671e0b86a7112bc3b8e48
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+<<<<<<< HEAD
     "react-router-dom": "^4.1.1",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.5.1"
+=======
+    "react-router-dom": "^4.1.1"
+>>>>>>> 46ac287f1aefc5c4823671e0b86a7112bc3b8e48
   }
 }
