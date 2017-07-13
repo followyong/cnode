@@ -109,6 +109,35 @@
   width: 100%;
 }
 .comments span{
-
   margin-left: 10px;
+}
+.collects{
+  display:flex;
+  width: 100%;
+
+  margin-top: 20px;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+
+
+}
+.collect{
+  margin-left: 10px;
+  flex-wrap:wrap;
+  align-items: center;
+}
+.collect h3{
+
+  text-overflow: ellipsis;
+	overflow: hidden;
+}
+.collect .tab{
+  padding:2px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  background-color: yellowgreen;
+  border-radius: 3px;
+  color:white;
+  font-size: 12px;
 }

@@ -7,6 +7,7 @@ import Home from './components/Home'
 import Topic from './components/Topic'
 import User from './components/User'
 import NewTopic from './components/NewTopic'
+import Collect from './components/Collect'
 
 class App extends React.Component{
   render(){
@@ -19,6 +20,7 @@ class App extends React.Component{
           <Route path='/topic/:id' component={Topic} />
           <Route path='/user/:loginname' component={User}/>
           <Route path='/newtopic' component={NewTopic} />
+          <Route path='/topic_collect/:loginname' component={Collect} />
 
           <Footer />
         </div>

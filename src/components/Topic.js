@@ -18,7 +18,8 @@ class Topic extends React.Component{
       },
       reply:'',
 			visible: false,
-			replyInfo: null
+			replyInfo: null,
+      collect:false
     }
   }
   getData(){
@@ -70,8 +71,34 @@ class Topic extends React.Component{
   handleReply(reply){
     this.setState({visible: true, replyInfo: reply, reply: `@${reply.author.loginname} `})
   }
+  handleCollect(topic_id){
+    if(sessionStorage.accesstoken){
+      var accesstoken=sessionStorage.accesstoken
+    }else{
+      message.error('请登录')
+      return
+    }
+    let {collect} = this.state
+    if(!collect){
+      axios.post(`${url}/topic_collect/collect`,{accesstoken,topic_id})
+      .then(res => {
+        console.log(res)
+        this.setState({collect:true})
+      })
+      .catch(err => message.error('收藏失败'))
+    }else{
+      axios.post(`${url}/topic_collect/de_collect`,{accesstoken,topic_id})
+      .then(res => {
+        console.log(res)
+        this.setState({collect:false})
+      })
+      .catch(err => message.error('取消收藏失败'))
+
+    }
+
+  }
   render(){
-    let {data,tabs,comment,reply,visible,replyInfo} =this.state
+    let {data,tabs,comment,reply,visible,replyInfo,collect} =this.state
     return(
       <div>
         {
@@ -95,6 +122,7 @@ class Topic extends React.Component{
                   ·来自 {tabs[data.tab]}
                 </strong>
               </p>
+              <Button type="primary" onClick={this.handleCollect.bind(this,data.id)}>{collect ? "取消收藏" : "收藏"}</Button>
               <div dangerouslySetInnerHTML={{__html: data.content}} className="substance" />
               <div className="reply">
                 <h3>添加回复</h3>

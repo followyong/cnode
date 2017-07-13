@@ -33,6 +33,7 @@ class User extends React.Component{
                   <img className="ant-avatar"  src={user.avatar_url} alt={user.loginname} />
                   <h2>{user.loginname}</h2><br />
                   <h3>{user.score}积分</h3><br />
+                  <Link to={`/topic_collect/${user.loginname}`}><h3>收藏的话题</h3></Link>
                   <h3>最近创建的话题</h3><br />
                   {
                     user.recent_topics.map(item =>(
@@ -59,7 +60,7 @@ class User extends React.Component{
             ):
               <div style={{textAlign:'center'}}><Spin size="large" /></div>
           }
-          </Card>
+        </Card>
       </div>
     )
   }
