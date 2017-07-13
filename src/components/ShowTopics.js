@@ -28,7 +28,7 @@ class ShowTopics extends React.Component{
           :
           data.map(item =>(
             <div key={item.id} className="topic">
-              <Avatar size="large" src={item.author.avatar_url} className="img"/>
+              <Link to={`/user/${item.author.loginname}`}><Avatar size="large" src={item.author.avatar_url} className="img"/></Link>
               <div className="title">
                 <h3><Link to={`/topic/${item.id}`}>{item.title}</Link></h3>
                 <span className="tab">
