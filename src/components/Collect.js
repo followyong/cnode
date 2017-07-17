@@ -1,14 +1,17 @@
 import React from 'react'
 import axios from 'axios'
 import {url} from '../config'
-import {Avatar} from 'antd'
+import {Avatar,Button} from 'antd'
 import {Link} from 'react-router-dom'
+
 
 class Collect extends React.Component{
   constructor(){
     super()
     this.state={
       data:null,
+      collect:true,
+      visible:true,
       tabs:{
         ask:"问答",
         share:"分享",
@@ -28,9 +31,23 @@ class Collect extends React.Component{
   componentDidMount(){
     this.getData()
   }
+  handleDecollect(topic_id){
+    if(sessionStorage.accesstoken){
+      var accesstoken=sessionStorage.accesstoken
+    }else{
+      message.error('请登录')
+      return
+    }
+    axios.post(`${url}/topic_collect/de_collect`,{accesstoken,topic_id})
+    .then(res => {
+      console.log(res)
+      this.setState({collect:false,visible:false})
+    })
+    .catch(err => message.error('取消收藏失败'))
+  }
   render(){
     console.log(this.props)
-    let {data,tabs} = this.state
+    let {data,tabs,collect,visible} = this.state
     console.log(data)
     return(
       <div style={{padding:'10px'}}>
@@ -56,18 +73,10 @@ class Collect extends React.Component{
                     &nbsp;&nbsp;
                     <span><strong>访问量：{item.visit_count}</strong></span>
                   </div>
+                  <Button type="danger" onClick={this.handleDecollect.bind(this,item.id)}>取消收藏</Button>
               </div>
-            )
-
-            )
-
-
-
-
-           : null
-
-        }
-
+            )): null
+          }
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {url} from '../config'
-import {message,Spin,Card} from 'antd'
+import {message,Spin,Card,BackTop} from 'antd'
 import {Link} from 'react-router-dom'
 
 class User extends React.Component{
@@ -61,6 +61,7 @@ class User extends React.Component{
               <div style={{textAlign:'center'}}><Spin size="large" /></div>
           }
         </Card>
+        <BackTop style={{position:'fixed',right:'20px'}}/>
       </div>
     )
   }

@@ -42,12 +42,9 @@
   color:white;
   font-size: 12px;
 }
-.content{
-  padding:10px;
-}
 .titleBar{
   width: 100%;
-  display: flex;
+  display:flex;
 
 }
 .titleBar .tab{

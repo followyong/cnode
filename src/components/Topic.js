@@ -1,6 +1,6 @@
 import React from 'react'
 import {url} from '../config'
-import {message,Spin,BackTop,Input,Button,Avatar,Icon,Modal} from 'antd'
+import {message,Spin,BackTop,Input,Button,Avatar,Icon,Modal,Card} from 'antd'
 import axios from 'axios'
 import moment from 'moment';
 import {Link} from 'react-router-dom'
@@ -93,66 +93,65 @@ class Topic extends React.Component{
         this.setState({collect:false})
       })
       .catch(err => message.error('取消收藏失败'))
-
     }
-
   }
   render(){
     let {data,tabs,comment,reply,visible,replyInfo,collect} =this.state
     return(
-      <div>
-        {
-          data ? (
-            <div className="content">
-              <div className="titleBar">
-                <span className="tab">
+      <div style={{padding:'10px'}}>
+        <Card>
+          {
+            data ? (
+              <div className="content">
+                <div className="titleBar">
+                  <span className="tab">
+                    {
+                    data.top ? "置顶" :
+                    data.good ? "精华" :
+                    tabs[data.tab]
+                    }
+                  </span>
+                  &nbsp;&nbsp;&nbsp;
+                  <h2>{data.title}</h2>
+                </div>
+                <p className="author">
+                  <strong>
+                    ·发布于{moment(data.create_at).fromNow()}&nbsp;&nbsp;
+                    ·作者{data.author.loginname}&nbsp;&nbsp;
+                    ·来自 {tabs[data.tab]}
+                  </strong>
+                </p>
+                <Button type="primary" onClick={this.handleCollect.bind(this,data.id)}>{collect ? "取消收藏" : "收藏"}</Button>
+                <div dangerouslySetInnerHTML={{__html: data.content}} className="substance" />
+                <div className="reply">
+                  <h3>添加回复</h3>
+                  <Input type="textarea" value={comment} onChange={e=>this.setState({comment: e.target.value})} />
+                  <Button type="primary" onClick={this.handleComment.bind(this,'comment')}>回复</Button>
+                  <h3>全部回复</h3>
                   {
-                  data.top ? "置顶" :
-                  data.good ? "精华" :
-                  tabs[data.tab]
-                  }
-                </span>
-                &nbsp;&nbsp;&nbsp;
-                <h2>{data.title}</h2>
-              </div>
-              <p className="author">
-                <strong>
-                  ·发布于{moment(data.create_at).fromNow()}&nbsp;&nbsp;
-                  ·作者{data.author.loginname}&nbsp;&nbsp;
-                  ·来自 {tabs[data.tab]}
-                </strong>
-              </p>
-              <Button type="primary" onClick={this.handleCollect.bind(this,data.id)}>{collect ? "取消收藏" : "收藏"}</Button>
-              <div dangerouslySetInnerHTML={{__html: data.content}} className="substance" />
-              <div className="reply">
-                <h3>添加回复</h3>
-                <Input type="textarea" value={comment} onChange={e=>this.setState({comment: e.target.value})} />
-                <Button type="primary" onClick={this.handleComment.bind(this,'comment')}>回复</Button>
-
-                <h3>全部回复</h3>
-                {
-                  data.replies.map(item =>(
-                    <div key={item.id} className="comments">
-                      <div className="comments-top">
-                        <Link to={`/user/${item.author.loginname}`}>
-                          <Avatar src={item.author.avatar_url} shape="square" size="large"/>
-                        </Link>
-                        <span ><strong>{item.author.loginname}</strong>· {moment(item.create_at).fromNow()}</span>
-                        <span style={{fontSize:"14px",color:'red'}}>
-                          <Icon type="like-o" onClick={this.handleLike.bind(this,item.id)}/>&nbsp;&nbsp;&nbsp;
-                          <Icon type="edit" onClick={this.handleReply.bind(this,item)} />
-                        </span>
-
+                    data.replies.map(item =>(
+                      <div key={item.id} className="comments">
+                        <div className="comments-top">
+                          <Link to={`/user/${item.author.loginname}`}>
+                            <Avatar src={item.author.avatar_url} shape="square" size="large"/>
+                          </Link>
+                          <span ><strong>{item.author.loginname}</strong>· {moment(item.create_at).fromNow()}</span>
+                          <span style={{fontSize:"14px",color:'red'}}>
+                            <Icon type="like-o" onClick={this.handleLike.bind(this,item.id)}/>&nbsp;&nbsp;&nbsp;
+                            <Icon type="edit" onClick={this.handleReply.bind(this,item)} />
+                          </span>
+                        </div>
+                        <div dangerouslySetInnerHTML={{__html: item.content}}  className="comments-bottom"/>
                       </div>
-                      <div dangerouslySetInnerHTML={{__html: item.content}}  className="comments-bottom"/>
-                    </div>
-                  ))
-                }
+                    ))
+                  }
+                </div>
               </div>
-            </div>
-          ) :
-          <div style={{textAlign:'center'}}><Spin size="large" /></div>
-        }
+            ) :
+            <div style={{textAlign:'center'}}><Spin size="large" /></div>
+          }
+          <BackTop style={{position:'fixed',left:'20px'}}/>
+        </Card>
         <Modal
           title={replyInfo? `回复：${replyInfo.author.loginname}` : '回复：'}
           visible={visible}
@@ -161,7 +160,6 @@ class Topic extends React.Component{
         >
           <Input type="textarea" rows={4} value={reply} onChange={e=>this.setState({reply: e.target.value})} ref={input=> this.input = input}/>
         </Modal>
-        <BackTop style={{position:'fixed',right:'15px'}} />
       </div>
     )
   }
