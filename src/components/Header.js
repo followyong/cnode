@@ -60,6 +60,9 @@ class Header extends React.Component{
             <Link to='/newtopic'>发文章</Link>
           </Menu.Item>
           <Menu.Item>
+            <Link to={`/message/count`}>消息中心</Link>
+          </Menu.Item>
+          <Menu.Item>
             <Button type="danger" onClick={this.handleLogout.bind(this)}>退出</Button>
           </Menu.Item>
         </Menu>
